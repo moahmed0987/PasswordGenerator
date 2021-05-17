@@ -14,8 +14,10 @@ public class PasswordGenerator {
     }
 
     public static String generatePassword(int length, boolean includeUppercase, boolean includeLowercase, boolean includeDigits, boolean includeSpecials) {
+        // set from which to pick potential characters for password
         String charactersToUse = "";
 
+        // add to set based on parameters passed
         if (includeUppercase) {
             charactersToUse += UPPERCASE;
         }
@@ -28,14 +30,21 @@ public class PasswordGenerator {
         if (includeSpecials) {
             charactersToUse += SPECIALS;
         }
+        
+        // if all false, default to lowercase
+        if(charactersToUse.equals("")){
+            charactersToUse += LOWERCASE;
+        }
 
+        // pick random character from character set iteratively given the desired length
         String passwordToReturn = "";
         for (int i = 0; i < length; i++) {
             int randomPos = random.nextInt(charactersToUse.length());
             passwordToReturn += charactersToUse.charAt(randomPos);
 
         }
-        System.out.println(passwordToReturn);
+        
+        // return the password
         return passwordToReturn;
     }
 
